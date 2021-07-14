@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
+// what happens when user goes to the home route
 app.get("/", function(req, res) {
+    // send them the file that's in the index.html
     res.sendFile(__dirname + "/index.html");
 
     // })
@@ -20,6 +22,8 @@ app.post("/", function(req, res){
         const appKey = "08c7881a89d3c99e4e2b83bae432388b";
         const unit = metric;
         const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + appKey +"&units=" + unit;
+
+        // using https get method to get weather data
         https.get(url, function(response) {
         //     console.log(response.statusCode);
     
@@ -44,6 +48,7 @@ app.post("/", function(req, res){
                 // };
                 // console.log(JSON.stringify(object));
             });
+    });
 });
 
 app.listen(3000, function() {
