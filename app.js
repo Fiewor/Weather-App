@@ -1,4 +1,3 @@
-
 const express = require('express');
 const https = require('https'); // no need to import this because it's a native node module and so it comes with the project initialisation
 // const bodyParser = require('body-parser');
@@ -20,13 +19,12 @@ app.post("/", function(req, res){
     // making an http (get) request over the internet to the open weather (api) url to fetch some data
     const query = req.body.cityName;
     const appKey = "08c7881a89d3c99e4e2b83bae432388b";
-    const unit = metric;
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=" + query + "&appid=" + appKey +"&units=" + unit;
+    const unit = "imperial";
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${appKey}&units=${unit}`;
 
     // using https get method to get weather data
-    get(url, function(response) {
-    //     console.log(response.statusCode);
-
+    https.get(url, function(response) {
+    //  console.log(response.statusCode);
         response.on("data", function(data){
             const weatherData = JSON.parse(data); // turns the JSON that is currently in another format(hex or string or binary) to a javascript object
             // console.log(weatherData);
